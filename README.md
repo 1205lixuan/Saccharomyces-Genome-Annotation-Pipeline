@@ -1,7 +1,7 @@
 A Saccharomyes genome annotation pipeline
 
+
 Introduction:
-=============
 
 This pipeline is used to perform large-scale genome annotation 
 for Saccharomyes cerevisiae and its relatives. It performs two 
@@ -17,11 +17,10 @@ Besides, please keep other subdirs ./ref_genome and ./tmp_blastout.
 The former includes the reference files (default for strain S288c).
 The latter is for the blast result files.
 
-Run the pipeline:
-=================
+
+How to run the pipeline:
 
 Inputs:
--------
 
 Before running the pipeline, the genomes sequences to annotate
 should be placed in the subdir ./genome_seq. The predicted gene 
@@ -31,17 +30,16 @@ sequences and a tag for each genome set by the user should be
 prepared and placed in the current dir ./ (a sample file is 
 ./genome3_test.list).
 
-Command:
---------
 
-$perl ./annt_cluster_pipeline.plx genome3_test.list
+Command:
+
+$perl ./annt_cluster_pipeline.plx genome3_test.list faa3_test.list
 
 It will takes very long time for thousands of genomes and the 
 time consuming steps are MAKER annotation and clustering of 
 tens of millions of genes.
 
 Parameters:
------------
 	can be specified in the script file ./annt_cluster_pipeline.plx.
 
 	$cpu_num:
@@ -58,12 +56,10 @@ Parameters:
 		obtained gene families.
 
 Outputs:
---------
 	Gene models will be placed in the subdir ./genome_seq.
 	Gene/protein families will be placed in the current dir ($fampref.tab).
 	
-Others:
--------
+Other things:
 	The pipeline employs the MAKER program to annotate the genomes. Therefore,
 	users should install MAKER correctly before running this pipeline, or 
 	have to comment out the command (1.2) in the file ./annt_cluster_pipeline.plx
@@ -74,7 +70,3 @@ Others:
 	A few protein reference files were placed in the subdir ./files_for_maker_annotation.
 	Users need to placed the references file and configure files for MAKER program
 	in the correct dir based on their own system.
-	
-	
-
-
