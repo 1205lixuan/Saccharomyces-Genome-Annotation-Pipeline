@@ -25,10 +25,14 @@ Inputs:
 Before running the pipeline, the genomes sequences to annotate
 should be placed in the subdir ./genome_seq. The predicted gene 
 models will also be placed in this subdir by the pipeline. 
-Meanwhile, a file containing the file names of these genome 
-sequences and a tag for each genome set by the user should be 
-prepared and placed in the current dir ./ (a sample file is 
-./genome3_test.list).
+Meanwhile, two files containing the sequence file information
+should be provided in the current dir (./). (1). A file containing 
+the file names of these genome sequences and a tag for each genome set, 
+which is used for the genome annotation task (a sample file is 
+./genome3_test.list). (2). A file containing the file names of protein
+sequences and a tag for each set of the protein sequences, which is
+used for the gene (protein) family cluster task (a sample file is
+./faa3_test.list). 
 
 
 Command:
@@ -52,12 +56,15 @@ Parameters:
 	$runpref:
 		a prefix to tag the current run.
 	$fampref:
+		a prefix for the output file of the candidate gene families and for
+		naming all obtained candidate gene families.
+	$fampref2:
 		a prefix for the output file of the gene families and for naming all 
 		obtained gene families.
 
 Outputs:
 	Gene models will be placed in the subdir ./genome_seq.
-	Gene/protein families will be placed in the current dir ($fampref.tab).
+	Gene/protein families will be placed in the current dir ($fampref2.tab).
 	
 Other things:
 	The pipeline employs the MAKER program to annotate the genomes. Therefore,
@@ -70,3 +77,4 @@ Other things:
 	A few protein reference files were placed in the subdir ./files_for_maker_annotation.
 	Users need to placed the references file and configure files for MAKER program
 	in the correct dir based on their own system.
+	
