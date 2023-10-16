@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# maker_clust2_diamond.plx
+# maker_clust2_diamond_2.plx
 use strict;
 use warnings;
 
@@ -25,7 +25,7 @@ my $score_id = 14;
 my $s_cov_id = 15;	
 my $id_max   = 15;	
 
-
+$| = 1;
 my $maker_filter_mdl_prot_suffix2= ".maker_filter.prot.clean.faa";
 my $cpu_num      = shift;
 my $cov_cutoff   = shift;
@@ -38,12 +38,11 @@ my $blastout_dir = "tmp_blastout";
 my $job_prefix   = shift;
 
 if (not $job_prefix){
-	die "usage: perl maker_clust2_diamond.plx <cpu_num> <cov cutoff> <iden cutoff> <ref.faa_dir> <ref.fa> <maker.faa_dir> <infile_list> <job prefix>\n";
+	die "usage: perl maker_clust2_diamond_2.plx <cpu_num> <cov cutoff> <iden cutoff> <ref.faa_dir> <ref.fa> <maker.faa_dir> <infile_list> <job prefix>\n";
 }#
 
 my $outfile1 = $job_prefix . ".detail.out";
-#my $outfile2 = $job_prefix . ".map.out";
-my $outfile3 = $job_prefix . ".maker_only_cluster.out";
+my $outfile2 = $job_prefix . ".maker_only_cluster.out";
 my $unmap_seq = $job_prefix . ".all_unmapped_seq.fa";
 
 my @maker_filename;
@@ -113,12 +112,13 @@ close IN;
 #if ( $mode eq "all"){
 	close UNMAP;
 #}
+print "diamond_cluster3.2.plx start\n";
 
-system ("perl $script_dir/diamond_cluster3.1.plx $cpu_num $iden_cutoff $cov_cutoff prot $unmap_seq");
-
+system ("perl $script_dir/diamond_cluster3.2.plx $cpu_num $iden_cutoff $cov_cutoff prot $unmap_seq");
+print "diamond_cluster3.2.plx done\n";
 #read results and parse
 my $tmp = "$unmap_seq.clust." . $iden_cutoff . "." . $cov_cutoff . ".info";
-open OUT3, ">$outfile3" or die "fail to open $outfile3:$!\n";
+open OUT3, ">$outfile2" or die "fail to open $outfile2:$!\n";
 print OUT3 "#id";
 foreach my $i (0 .. $#maker_filename){
 	print OUT3 "\t",$maker_filename[$i];
